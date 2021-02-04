@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Apple {
-    int x;
-    int y;
+    final int x;
+    final int y;
     Random ran;
 
     public Apple() {

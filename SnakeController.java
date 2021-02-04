@@ -13,6 +13,8 @@ public class SnakeController extends JPanel implements ActionListener {
     Timer tim;
     Apple a;
     Snake s;
+    int screenWidth;
+    int screenHeight;
 
     public SnakeController() {
         running = false;
@@ -44,16 +46,18 @@ public class SnakeController extends JPanel implements ActionListener {
         startButton.setFont(new Font("Serif", Font.BOLD, 25));
         gameOverLabel.setFont(new Font("Serif", Font.BOLD, 25));
         startButton.addActionListener(this);
-        this.setSize(new Dimension(1365,740));
+        screenWidth = 1365;
+        screenHeight = 740;
+        this.setSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.lightGray);
         this.setFocusable(true);
         this.add(startButton);
         this.add(gameOverLabel);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-
         if(source == startButton) {
             startButton.setVisible(false);
             startSnake();
@@ -69,6 +73,7 @@ public class SnakeController extends JPanel implements ActionListener {
             }
         }
     }
+
     public void startSnake() {
         s = new Snake();
         a = new Apple();
@@ -78,14 +83,18 @@ public class SnakeController extends JPanel implements ActionListener {
         tim.start();
         gameOverLabel.setVisible(false);
     }
+
     public void checkPos() {
+        //sprawdzamy kolizję z ciałem
         for(int i = s.getLength(); i > 0; i--) {
             if ((s.getX(0) == s.getX(i)) && s.getY(0) == s.getY(i)) {
                 running = false;
             }
         }
-        if(s.getX(0) < 0 || s.getX(0) > 1300 || s.getY(0) < 0 || s.getY(0) > 650)
+        //sprawdzamy kolizję ze ścianami
+        if(s.getX(0) < 0 || s.getX(0) > screenWidth - 65 || s.getY(0) < 0 || s.getY(0) > screenHeight - 90)
             running = false;
+        //sprawdzamy kolizję z jabłkami
         if(a.getX() == s.getX(0) && a.getY() == s.getY(0)) {
             apples++;
             s.addLength();
@@ -93,12 +102,16 @@ public class SnakeController extends JPanel implements ActionListener {
             tim.setDelay(s.addSpeed());
         }
     }
+
+    //ruch węża
     public void moveSnake() {
         for(int i = s.getLength(); i > 0; i--) {
             s.moveBody(i);
         }
         s.moveHead();
     }
+
+    //malowanie węża i jabłka
     public void draw(Graphics g) {
         if(running) {
             g.setColor(Color.RED);
@@ -109,10 +122,14 @@ public class SnakeController extends JPanel implements ActionListener {
             }
         }
     }
+
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
     }
+
+    //ekran końcowy
     public void gameOver() {
         tim.stop();
         startButton.setVisible(true);
