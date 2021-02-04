@@ -2,8 +2,8 @@ public class Snake {
     int length;
     int speed;
     char direction;
-    //wąż jako tablica x i y gdzie zerowy indeks to głowa a reszta segmentów to ciało
-    //określa też maksymalny rozmiar węża
+    //wąż jako tablica x i y gdzie zerowy indeks to głowa a reszta to segmenty ciała
+    //wielkość tablicy określa też maksymalny rozmiar węża
     final int[] xPos;
     final int[] yPos;
 
@@ -35,13 +35,13 @@ public class Snake {
         this.direction = direction;
     }
 
-    //ruch ciała węża, czyli reszty indeksów poza zerowym podążą za poprzednim
+    //ruch ciała węża, czyli reszta indeksów poza zerowym podążą za poprzednim
     public void moveBody(int i) {
         xPos[i] = xPos[i-1];
         yPos[i] = yPos[i-1];
     }
 
-    //ruch samej głowy węża, czyli zerowego indeksu tablicy
+    //ruch samej głowy węża, czyli zerowego indeksu tablicy w zależności od kierunku
     public void moveHead() {
         char dir = this.direction;
         if(dir == 'U')

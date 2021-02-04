@@ -18,6 +18,7 @@ public class SnakeController extends JPanel implements ActionListener {
 
     public SnakeController() {
         running = false;
+        //keyadapter do zmiany kierunku węża
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
