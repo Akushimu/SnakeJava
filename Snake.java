@@ -35,7 +35,7 @@ public class Snake {
         this.direction = direction;
     }
 
-    //ruch ciała węża, czyli reszty indeksów poza zerowym
+    //ruch ciała węża, czyli reszty indeksów poza zerowym podążą za poprzednim
     public void moveBody(int i) {
         xPos[i] = xPos[i-1];
         yPos[i] = yPos[i-1];
