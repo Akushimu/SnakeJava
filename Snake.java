@@ -4,8 +4,8 @@ public class Snake {
     char direction;
     //wąż jako tablica x i y gdzie zerowy indeks to głowa a reszta to segmenty ciała
     //wielkość tablicy określa też maksymalny rozmiar węża
-    final int[] xPos;
-    final int[] yPos;
+    int[] xPos;
+    int[] yPos;
 
     public Snake() {
         length = 3;

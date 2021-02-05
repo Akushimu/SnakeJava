@@ -5,10 +5,10 @@ public class Apple {
     final int y;
     Random ran;
 
-    public Apple() {
+    public Apple(int w, int h) {
         ran = new Random();
-        x = ran.nextInt(1375/50)*50;
-        y = ran.nextInt(700/50)*50;
+        x = ran.nextInt((w+10)/50)*50;
+        y = ran.nextInt((h-40)/50)*50;
     }
 
     public int getX() {

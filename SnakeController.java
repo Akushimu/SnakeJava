@@ -16,7 +16,7 @@ public class SnakeController extends JPanel implements ActionListener {
     int screenWidth;
     int screenHeight;
 
-    public SnakeController() {
+    public SnakeController(int w, int h) {
         running = false;
         //keyadapter do zmiany kierunku węża
         this.addKeyListener(new KeyAdapter() {
@@ -47,8 +47,8 @@ public class SnakeController extends JPanel implements ActionListener {
         startButton.setFont(new Font("Serif", Font.BOLD, 25));
         gameOverLabel.setFont(new Font("Serif", Font.BOLD, 25));
         startButton.addActionListener(this);
-        screenWidth = 1365;
-        screenHeight = 740;
+        screenWidth = w;
+        screenHeight = h;
         this.setSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.lightGray);
         this.setFocusable(true);
@@ -77,7 +77,7 @@ public class SnakeController extends JPanel implements ActionListener {
 
     public void startSnake() {
         s = new Snake();
-        a = new Apple();
+        a = new Apple(screenWidth, screenHeight);
         running = true;
         apples = 0;
         tim = new Timer(s.getSpeed(), this);
@@ -99,7 +99,7 @@ public class SnakeController extends JPanel implements ActionListener {
         if(a.getX() == s.getX(0) && a.getY() == s.getY(0)) {
             apples++;
             s.addLength();
-            a = new Apple();
+            a = new Apple(screenWidth, screenHeight);
             tim.setDelay(s.addSpeed());
         }
     }
